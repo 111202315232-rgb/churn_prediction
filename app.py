@@ -154,9 +154,9 @@ if predict_btn:
 
         df_input = pd.DataFrame([input_data])
 
-        # Drop kolom yang tidak dipakai saat training
-        drop_cols = ['customer_id', 'signup_date', 'last_purchase_date']
-        df_input.drop(columns=[c for c in drop_cols if c in df_input.columns], inplace=True)
+        # NOTE: customer_id, signup_date, last_purchase_date TIDAK di-drop di sini.
+        # preprocessor.joblib dilatih dengan kolom-kolom ini tetap ada (lihat feature_info.json),
+        # jadi harus tetap disertakan saat transform meskipun nilainya dummy/default.
 
         try:
             X_transformed = preprocessor.transform(df_input)
